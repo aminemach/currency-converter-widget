@@ -7,7 +7,7 @@
     stickyIcon.style.left = '0';
     stickyIcon.style.width = '50px';
     stickyIcon.style.height = '50px';
-    stickyIcon.style.backgroundColor = '#007bff'; // You can change this color
+    stickyIcon.style.backgroundColor = 'white'; // You can change this color
     stickyIcon.style.color = 'white';
     stickyIcon.style.display = 'flex';
     stickyIcon.style.alignItems = 'center';
