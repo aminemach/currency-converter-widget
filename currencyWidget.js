@@ -7,7 +7,7 @@
     stickyIcon.style.left = '0';
     stickyIcon.style.width = '50px';
     stickyIcon.style.height = '50px';
-    stickyIcon.style.backgroundColor = 'white'; // You can change this color
+    stickyIcon.style.backgroundColor = '#FFFFFF'; 
     stickyIcon.style.color = 'white';
     stickyIcon.style.display = 'flex';
     stickyIcon.style.alignItems = 'center';
@@ -15,13 +15,12 @@
     stickyIcon.style.cursor = 'pointer';
     stickyIcon.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.3)';
     stickyIcon.style.zIndex = '1000';
-    stickyIcon.innerHTML = '<span style="font-size: 24px;">💱</span>'; // Currency exchange icon
-    stickyIcon.style.borderTopLeftRadius = '0'; // Set top-left radius to 0
-    stickyIcon.style.borderBottomLeftRadius = '0'; // Set bottom-left radius to 0
-    stickyIcon.style.borderTopRightRadius = '50%'; // Keep right corners rounded
-    stickyIcon.style.borderBottomRightRadius = '50%'; // Keep right corners rounded
+    stickyIcon.innerHTML = '<span style="font-size: 24px;">💱</span>';
+    stickyIcon.style.borderTopLeftRadius = '0'; 
+    stickyIcon.style.borderBottomLeftRadius = '0'; 
+    stickyIcon.style.borderTopRightRadius = '50%'; 
+    stickyIcon.style.borderBottomRightRadius = '50%'; 
 
-    // Append the sticky icon to the body
     document.body.appendChild(stickyIcon);
 
     stickyIcon.addEventListener('click', function() {

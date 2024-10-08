@@ -1,5 +1,5 @@
 (function() {
-    // Hardcoded exchange rates (USD as base currency)
+
     const exchangeRates = {
       USD: { EUR: 0.92, GBP: 0.76, JPY: 140.0 },
       EUR: { USD: 1.09, GBP: 0.82, JPY: 151.0 },
@@ -7,7 +7,6 @@
       JPY: { USD: 0.0071, EUR: 0.0066, GBP: 0.0054 }
     };
 
-    // Create the container for the converter
     const converterContainer = document.createElement('div');
     converterContainer.id = 'currency-converter';
     converterContainer.style.padding = '10px';
@@ -15,7 +14,6 @@
     converterContainer.style.width = '250px';
     converterContainer.style.backgroundColor = '#f9f9f9';
 
-    // Insert HTML for the converter
     converterContainer.innerHTML = `
       <h3>Currency Converter</h3>
       <input type="number" id="amount" placeholder="Amount" style="width: 100%; padding: 8px; margin-bottom: 10px;">
@@ -35,20 +33,16 @@
       <p id="result" style="margin-top: 10px;"></p>
     `;
 
-    // Append the container to the specific div with id 'currency-widget'
     const widgetDiv = document.getElementById('currency-widget');
     if (widgetDiv) {
         widgetDiv.appendChild(converterContainer);
     }
 
-    // Function to copy button styles
     function copyButtonStyles(sourceSelector) {
         const sourceButton = document.querySelector(sourceSelector);
         if (sourceButton) {
             const computedStyle = getComputedStyle(sourceButton);
             const convertButton = document.getElementById('convertBtn');
-
-            // Apply relevant styles
             convertButton.style.backgroundColor = computedStyle.backgroundColor;
             convertButton.style.color = computedStyle.color;
             convertButton.style.border = computedStyle.border;
@@ -56,14 +50,12 @@
             convertButton.style.fontSize = computedStyle.fontSize;
             convertButton.style.fontWeight = computedStyle.fontWeight;
             convertButton.style.padding = computedStyle.padding;
-            convertButton.style.cursor = 'pointer'; // Ensure the cursor looks clickable
+            convertButton.style.cursor = 'pointer'; 
         }
     }
 
-    // Call the function with a selector for the button you want to copy from
-    copyButtonStyles('.btn'); // Adjust the selector based on the site's button class
+    copyButtonStyles('.btn'); 
 
-    // Conversion logic
     document.getElementById('convertBtn').addEventListener('click', function() {
       const amount = parseFloat(document.getElementById('amount').value);
       const fromCurrency = document.getElementById('fromCurrency').value;
