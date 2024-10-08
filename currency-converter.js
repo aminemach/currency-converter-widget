@@ -41,9 +41,27 @@
         widgetDiv.appendChild(converterContainer);
     }
 
-    // Change button color to the website's primary color
-    const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color') || '#007bff'; // Default to Bootstrap primary color
-    document.getElementById('convertBtn').style.backgroundColor = primaryColor;
+    // Function to copy button styles
+    function copyButtonStyles(sourceSelector) {
+        const sourceButton = document.querySelector(sourceSelector);
+        if (sourceButton) {
+            const computedStyle = getComputedStyle(sourceButton);
+            const convertButton = document.getElementById('convertBtn');
+
+            // Apply relevant styles
+            convertButton.style.backgroundColor = computedStyle.backgroundColor;
+            convertButton.style.color = computedStyle.color;
+            convertButton.style.border = computedStyle.border;
+            convertButton.style.borderRadius = computedStyle.borderRadius;
+            convertButton.style.fontSize = computedStyle.fontSize;
+            convertButton.style.fontWeight = computedStyle.fontWeight;
+            convertButton.style.padding = computedStyle.padding;
+            convertButton.style.cursor = 'pointer'; // Ensure the cursor looks clickable
+        }
+    }
+
+    // Call the function with a selector for the button you want to copy from
+    copyButtonStyles('.btn'); // Adjust the selector based on the site's button class
 
     // Conversion logic
     document.getElementById('convertBtn').addEventListener('click', function() {
