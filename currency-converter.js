@@ -6,7 +6,7 @@
       GBP: { USD: 1.31, EUR: 1.22, JPY: 183.0 },
       JPY: { USD: 0.0071, EUR: 0.0066, GBP: 0.0054 }
     };
-  
+
     // Create the container for the converter
     const converterContainer = document.createElement('div');
     converterContainer.id = 'currency-converter';
@@ -14,7 +14,7 @@
     converterContainer.style.border = '1px solid #ddd';
     converterContainer.style.width = '250px';
     converterContainer.style.backgroundColor = '#f9f9f9';
-    
+
     // Insert HTML for the converter
     converterContainer.innerHTML = `
       <h3>Currency Converter</h3>
@@ -34,24 +34,28 @@
       <button id="convertBtn" style="width: 100%; padding: 10px; margin-top: 10px;">Convert</button>
       <p id="result" style="margin-top: 10px;"></p>
     `;
-  
+
     // Append the container to the specific div with id 'currency-widget'
     const widgetDiv = document.getElementById('currency-widget');
     if (widgetDiv) {
         widgetDiv.appendChild(converterContainer);
     }
-  
+
+    // Change button color to the website's primary color
+    const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color') || '#007bff'; // Default to Bootstrap primary color
+    document.getElementById('convertBtn').style.backgroundColor = primaryColor;
+
     // Conversion logic
     document.getElementById('convertBtn').addEventListener('click', function() {
       const amount = parseFloat(document.getElementById('amount').value);
       const fromCurrency = document.getElementById('fromCurrency').value;
       const toCurrency = document.getElementById('toCurrency').value;
-  
+
       if (!amount || fromCurrency === toCurrency) {
         document.getElementById('result').innerText = 'Invalid input.';
         return;
       }
-  
+
       const rate = exchangeRates[fromCurrency][toCurrency];
       const convertedAmount = (amount * rate).toFixed(2);
       document.getElementById('result').innerText = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
