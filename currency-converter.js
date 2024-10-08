@@ -35,9 +35,11 @@
       <p id="result" style="margin-top: 10px;"></p>
     `;
   
-    // Append the container to the target div
-    const widgetContainer = document.getElementById('currency-widget');
-    widgetContainer.appendChild(converterContainer);
+    // Append the container to the specific div with id 'currency-widget'
+    const widgetDiv = document.getElementById('currency-widget');
+    if (widgetDiv) {
+        widgetDiv.appendChild(converterContainer);
+    }
   
     // Conversion logic
     document.getElementById('convertBtn').addEventListener('click', function() {
@@ -54,5 +56,4 @@
       const convertedAmount = (amount * rate).toFixed(2);
       document.getElementById('result').innerText = `${amount} ${fromCurrency} = ${convertedAmount} ${toCurrency}`;
     });
-  })();
-  
+})();
