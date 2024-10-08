@@ -35,8 +35,9 @@
       <p id="result" style="margin-top: 10px;"></p>
     `;
   
-    // Append the container to the document body or another element
-    document.body.appendChild(converterContainer);
+    // Append the container to the target div
+    const widgetContainer = document.getElementById('currency-widget');
+    widgetContainer.appendChild(converterContainer);
   
     // Conversion logic
     document.getElementById('convertBtn').addEventListener('click', function() {
