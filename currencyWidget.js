@@ -1,7 +1,9 @@
 (function() {
     const scriptTag = document.querySelector('script[src*="currencyWidget.js"]');
     const redirectUrl = scriptTag.getAttribute('data-redirect-url');
+    const btnActionClass = scriptTag.getAttribute('btn-action'); // Retrieve btn-action class
 
+    // Create and style sticky icon
     const stickyIcon = document.createElement('div');
     stickyIcon.id = 'sticky-icon';
     stickyIcon.style.position = 'fixed';
@@ -25,13 +27,12 @@
 
     document.body.appendChild(stickyIcon);
 
+    // Handle click on the sticky icon
     stickyIcon.addEventListener('click', function() {
         window.location.href = redirectUrl;
     });
-})();
 
-
-(function() {
+    // Exchange rates data
     const exchangeRates = {
         USD: { EUR: 0.92, GBP: 0.76, JPY: 140.0 },
         EUR: { USD: 1.09, GBP: 0.82, JPY: 151.0 },
@@ -39,6 +40,7 @@
         JPY: { USD: 0.0071, EUR: 0.0066, GBP: 0.0054 }
     };
 
+    // Create currency converter container
     const converterContainer = document.createElement('div');
     converterContainer.id = 'currency-converter';
     converterContainer.style.padding = '20px';
@@ -51,7 +53,6 @@
     converterContainer.innerHTML = `
       <h3 style="margin-bottom: 15px; font-size: 20px;">Currency Converter</h3>
       <div style="display: flex; align-items: center; margin-bottom: 10px;">
-          <i class="fas fa-dollar-sign" style="margin-right: 5px;"></i>
           <input type="number" id="amount" placeholder="Amount" style="flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 4px;">
       </div>
       <div style="margin-bottom: 10px;">
@@ -73,17 +74,18 @@
           </select>
       </div>
       <button id="convertBtn" style="width: 100%; padding: 10px; margin-top: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
-          <i class="fas fa-exchange-alt" style="margin-right: 5px;"></i> Convert
+          Convert
       </button>
       <p id="result" style="margin-top: 10px; font-weight: bold;"></p>
     `;
 
+    // Append currency converter to the page
     const widgetDiv = document.getElementById('currency-widget');
     if (widgetDiv) {
         widgetDiv.appendChild(converterContainer);
     }
 
-
+    // Function to copy button styles dynamically
     function copyButtonStyles(sourceSelector) {
         const sourceButton = document.querySelector(sourceSelector);
         if (sourceButton) {
@@ -100,15 +102,30 @@
         }
     }
 
+    // Apply button styles if a source button is found
     copyButtonStyles('.btn');
 
-    document.getElementById('convertBtn').addEventListener('click', function() {
+    // Apply the btnActionClass dynamically to the convertBtn
+    const convertBtn = document.getElementById('convertBtn');
+    if (btnActionClass) {
+        convertBtn.classList.add(btnActionClass);
+    }
+
+    // Convert button functionality
+    convertBtn.addEventListener('click', function() {
         const amount = parseFloat(document.getElementById('amount').value);
         const fromCurrency = document.getElementById('fromCurrency').value;
         const toCurrency = document.getElementById('toCurrency').value;
 
-        if (!amount || fromCurrency === toCurrency) {
-            document.getElementById('result').innerText = 'Invalid input.';
+        // Validate the input
+        if (isNaN(amount) || amount <= 0) {
+            document.getElementById('result').innerText = 'Please enter a valid amount.';
+            return;
+        }
+
+        // Conversion logic
+        if (fromCurrency === toCurrency) {
+            document.getElementById('result').innerText = 'Cannot convert the same currency.';
             return;
         }
 
