@@ -1,7 +1,7 @@
 (function() {
     const scriptTag = document.querySelector('script[src*="currencyWidget.js"]');
     const redirectUrl = scriptTag.getAttribute('data-redirect-url');
-    const btnActionClass = scriptTag.getAttribute('btn-action'); // Retrieve btn-action class
+    const btnActionClass = scriptTag.getAttribute('data-btn-action'); // Retrieve btn-action class
 
     // Create and style sticky icon
     const stickyIcon = document.createElement('div');
@@ -50,6 +50,7 @@
     converterContainer.style.borderRadius = '8px';
     converterContainer.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
     converterContainer.style.fontFamily = 'Arial, sans-serif';
+    converterContainer.style.marginTop = '20px'; // Add margin for space from top
     converterContainer.innerHTML = `
       <h3 style="margin-bottom: 15px; font-size: 20px;">Currency Converter</h3>
       <div style="display: flex; align-items: center; margin-bottom: 10px;">
@@ -73,7 +74,7 @@
               <option value="JPY">JPY</option>
           </select>
       </div>
-      <button id="convertBtn" style="width: 100%; padding: 10px; margin-top: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+      <button id="convertBtn" style="padding: 10px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
           Convert
       </button>
       <p id="result" style="margin-top: 10px; font-weight: bold;"></p>
@@ -85,33 +86,11 @@
         widgetDiv.appendChild(converterContainer);
     }
 
-    // Function to copy button styles dynamically
-    function copyButtonStyles(sourceSelector) {
-        const sourceButton = document.querySelector(sourceSelector);
-        if (sourceButton) {
-            const computedStyle = getComputedStyle(sourceButton);
-            const convertButton = document.getElementById('convertBtn');
-            convertButton.style.backgroundColor = computedStyle.backgroundColor;
-            convertButton.style.color = computedStyle.color;
-            convertButton.style.border = computedStyle.border;
-            convertButton.style.borderRadius = computedStyle.borderRadius;
-            convertButton.style.fontSize = computedStyle.fontSize;
-            convertButton.style.fontWeight = computedStyle.fontWeight;
-            convertButton.style.padding = computedStyle.padding;
-            convertButton.style.cursor = 'pointer'; 
-        }
-    }
-
-    // Apply button styles if a source button is found
-    copyButtonStyles('.btn');
-
-    // Apply the btnActionClass dynamically to the convertBtn
+    // Apply btn-action class if available
     const convertBtn = document.getElementById('convertBtn');
-    if (btnActionClass) {
-        convertBtn.classList.add(btnActionClass);
-    }
+    convertBtn.classList.add(btnActionClass);
 
-    // Convert button functionality
+    // Handle currency conversion
     convertBtn.addEventListener('click', function() {
         const amount = parseFloat(document.getElementById('amount').value);
         const fromCurrency = document.getElementById('fromCurrency').value;
