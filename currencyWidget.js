@@ -1,5 +1,7 @@
 (function() {
-    // Create the sticky icon
+    const scriptTag = document.querySelector('script[src*="currencyWidget.js"]');
+    const redirectUrl = scriptTag.getAttribute('data-redirect-url') || 'contact.html';
+
     const stickyIcon = document.createElement('div');
     stickyIcon.id = 'sticky-icon';
     stickyIcon.style.position = 'fixed';
@@ -24,10 +26,6 @@
     document.body.appendChild(stickyIcon);
 
     stickyIcon.addEventListener('click', function() {
-        const currentUrl = window.location.href;
-        const urlParts = currentUrl.split('/');
-        urlParts[urlParts.length - 1] = 'contact.html';
-        const newUrl = urlParts.join('/');
-        window.location.href = newUrl;
+        window.location.href = redirectUrl;
     });
 })();
